@@ -9,6 +9,7 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask collisionLayer;
+    
 
 
     private Vector3 velocity = Vector3.zero;
@@ -35,7 +36,9 @@ public class MovementPlayer : MonoBehaviour
         {
             if (IsGrounded)
             {
+              
                 rb.AddForce(Vector3.up * jumpForce);
+                gameObject.GetComponent<Animator>().SetTrigger("Jump");
             }
         }
 
