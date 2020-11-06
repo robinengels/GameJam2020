@@ -7,7 +7,10 @@ public class ScoreManager : MonoBehaviour
     private int _hiScore;
     private static readonly string HI_SCORE = "HiScore";
     public Action<int> OnScoreChange;
+    public Action<int> OnHiScoreChange;
+    
     public int Score => (int) _currentScore;
+    public int HiScore => _hiScore;
 
     private void Awake()
     {
@@ -31,6 +34,9 @@ public class ScoreManager : MonoBehaviour
         _currentScore += value;
         OnScoreChange(Score);
         if (_currentScore > _hiScore)
+        {
             _hiScore = Score;
+            OnHiScoreChange(_hiScore);
+        }
     }
 }
