@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MovementPlayer : MonoBehaviour
 {
@@ -9,11 +12,18 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask collisionLayer;
-    
+
+    [SerializeField] private TMP_Text bonusText;
 
 
     private Vector3 velocity = Vector3.zero;
     private bool IsGrounded;
+    private float originalJumpForce;
+
+    private void Awake()
+    {
+        originalJumpForce = jumpForce;
+    }
 
     private void FixedUpdate()
     {
@@ -57,4 +67,27 @@ public class MovementPlayer : MonoBehaviour
         Gizmos.DrawWireSphere(GroundCheck.position, 0.05f);
     }
 
+    public void randBonus()
+    {
+        int bonus = Random.Range(1, 3);
+        switch (bonus)
+        {
+            case 1:
+                jumpForce = 180;
+                StartCoroutine(bonusJumpCoolDown());
+                break;
+            
+            case 2:
+                Debug.Log("Bonus 2");
+                break;
+                    
+        }
+    }
+
+    private IEnumerator bonusJumpCoolDown()
+    {
+        onBonusChange("SUPER JUMP");
+        yield return new WaitForSeconds(10f);
+        jumpForce = originalJumpForce;
+    }
 }
