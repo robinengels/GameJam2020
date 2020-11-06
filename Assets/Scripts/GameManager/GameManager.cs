@@ -19,26 +19,22 @@ public class GameManager : SingletonMb<GameManager>
 
     public void NewGame()
     {
-        LoadScene("Level");
+        SceneManager.LoadScene("Level");
     }
 
     public void PlayAgain()
     {
+        scoreManager.ResetScore();
         NewGame();
     }
 
     public void GameOver()
     {
-        LoadScene("GameOver");
+        SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
     }
 
     public void MainMenu()
     {
-        LoadScene("MainMenu");
-    }
-
-    private void LoadScene(string scene)
-    {
-        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        SceneManager.LoadScene("MainMenu");
     }
 }

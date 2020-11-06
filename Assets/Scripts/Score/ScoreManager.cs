@@ -29,6 +29,12 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt(HI_SCORE, _hiScore);
     }
 
+    public void ResetScore()
+    {
+        _currentScore = 0f;
+        OnScoreChange(Score);
+    }
+    
     public void IncreaseScore(float value)
     {
         _currentScore += value;

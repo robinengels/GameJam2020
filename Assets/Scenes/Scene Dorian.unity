@@ -1223,6 +1223,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 3057017401138490222, guid: 6f904e834942f694fa0f246433819b12,
+        type: 3}
+      propertyPath: prepended
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f904e834942f694fa0f246433819b12, type: 3}
 --- !u!1001 &7577355019944669942
