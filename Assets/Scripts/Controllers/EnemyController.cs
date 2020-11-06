@@ -10,7 +10,7 @@ namespace IPL
         [SerializeField] private float speed;
 
         private Transform _transform;
-        private static readonly int _PlayerContact = Animator.StringToHash("PlayerContact");
+        private static readonly int _Attack = Animator.StringToHash("Attack");
 
         private void Awake()
         {
@@ -25,14 +25,29 @@ namespace IPL
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            animator.SetTrigger(_PlayerContact);
+            StartCoroutine(PlayAttackAnimation());
             StartCoroutine(GameOver());
+        }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
         }
 
         private IEnumerator GameOver()
         {
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
+            var animationCycleLength = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            yield return new WaitForSeconds(animationCycleLength);
             GameManager.Instance.GameOver();
+        }
+
+        private IEnumerator PlayAttackAnimation()
+        {
+            while (true)
+            {
+                animator.SetTrigger(_Attack);
+                yield return new WaitForSeconds(3f);
+            }
         }
     }
 }
