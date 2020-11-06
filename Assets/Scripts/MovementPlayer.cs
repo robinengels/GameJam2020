@@ -17,7 +17,7 @@ public class MovementPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.05f, collisionLayer);
+        IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.1f, collisionLayer);
 
     }
 
@@ -54,7 +54,7 @@ public class MovementPlayer : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(GroundCheck.position, 0.5f);
+        Gizmos.DrawWireSphere(GroundCheck.position, 0.1f);
     }
 
 }
