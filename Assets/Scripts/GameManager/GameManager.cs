@@ -30,6 +30,8 @@ public class GameManager : SingletonMb<GameManager>
 
     public void GameOver()
     {
+        var ui = FindObjectOfType<Canvas>()?.gameObject;
+        if(ui) ui.SetActive(false);
         SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
     }
 
