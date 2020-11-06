@@ -206,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238644746}
   - component: {fileID: 238644747}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 573004163}
   - component: {fileID: 573004162}
   - component: {fileID: 573004161}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.2, y: 0.5}
   m_EdgeRadius: 0
 --- !u!4 &573004163
 Transform:
@@ -1008,7 +1008,7 @@ PrefabInstance:
     - target: {fileID: 7577355019156863852, guid: c9499f3798c0be149b6dfb03e8e66c78,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.06
+      value: -1.69
       objectReference: {fileID: 0}
     - target: {fileID: 7577355019156863852, guid: c9499f3798c0be149b6dfb03e8e66c78,
         type: 3}
@@ -1063,6 +1063,11 @@ PrefabInstance:
     - target: {fileID: 7577355019156863854, guid: c9499f3798c0be149b6dfb03e8e66c78,
         type: 3}
       propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7577355019156863854, guid: c9499f3798c0be149b6dfb03e8e66c78,
+        type: 3}
+      propertyPath: playerLayer.m_Bits
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
