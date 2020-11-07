@@ -5,18 +5,23 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MovementPlayer : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float jumpForce;
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask collisionLayer;
-    
     [SerializeField] private TMP_Text bonusText;
 
+    [SerializeField] private ProjectileController projectilePrefabe;
+    [SerializeField] private Transform LaunchOffset;
+
+    [SerializeField] private float SecondBeforePistolMode;
+    
     public Action<List<(string,int)>> onBonusUpdate;
     private Vector3 velocity = Vector3.zero;
+    private bool canFire;
     private bool IsGrounded;
     
     //BONUS JUMP
@@ -37,8 +42,9 @@ public class MovementPlayer : MonoBehaviour
         originalJumpForce = jumpForce;
         originalScale = gameObject.transform.localScale;
         bonusScale = originalScale * 2;
+        StartCoroutine(PistolMode());
     }
-
+    
     private void FixedUpdate()
     {
         IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.05f, collisionLayer);
@@ -60,18 +66,31 @@ public class MovementPlayer : MonoBehaviour
         {
             if (IsGrounded)
             {
-              
+
                 rb.AddForce(Vector3.up * jumpForce);
                 gameObject.GetComponent<Animator>().SetTrigger("Jump");
             }
         }
 
+        
+        if (canFire && Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(projectilePrefabe, LaunchOffset.position, LaunchOffset.rotation);
+        }
     }
 
     private IEnumerator IncreaseSpeed()
     {
         yield return new WaitForSeconds(1f);
         speed += (float)0.00001;
+
+    }
+
+    private IEnumerator PistolMode()
+    {
+        yield return new WaitForSeconds(SecondBeforePistolMode);
+        canFire = true;
+        gameObject.GetComponent<Animator>().SetTrigger("PistolTime");
 
     }
 

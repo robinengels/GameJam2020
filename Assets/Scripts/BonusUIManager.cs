@@ -8,7 +8,7 @@ using UnityEngine;
 public class BonusUIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text bonuxTest;
-    [SerializeField] private MovementPlayer player;
+    [SerializeField] private PlayerController player;
 
     private void Awake()
     {

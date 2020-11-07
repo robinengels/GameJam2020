@@ -10,7 +10,7 @@ public class bonusActivator : MonoBehaviour
     {
         Debug.Log("Trigger");
         gameObject.SetActive(false);
-        MovementPlayer player = FindObjectOfType<MovementPlayer>();
+        PlayerController player = FindObjectOfType<PlayerController>();
         player.randBonus();
     }
 }
