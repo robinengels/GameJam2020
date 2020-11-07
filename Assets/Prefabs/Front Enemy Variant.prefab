@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf85fef290a4aedb9370b4c8ffbeab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orthographicSizeMultiplier: 3
+  orthographicSizeMultiplier: 10
 --- !u!1001 &8267221598830558448
 PrefabInstance:
   m_ObjectHideFlags: 0
