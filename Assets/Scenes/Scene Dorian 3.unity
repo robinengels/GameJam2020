@@ -733,16 +733,17 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 32768
+  SlideCollider: {fileID: 0}
   projectilePrefabe: {fileID: 1040824723997147898, guid: 2d275bcb1e44d4adbafbb9b420f88ef0,
     type: 3}
   LaunchOffset: {fileID: 142692868}
-  acceleration: 0
+  fireRate: 1
   SecondBeforePistolMode: 0
+  acceleration: 0
   speed: 0.5
-  SlideCollider: {fileID: 0}
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!4 &620738585
 Transform:
   m_ObjectHideFlags: 0
@@ -887,7 +888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8460c17830ace78468adac84ca443cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsPerUnit: 1
+  pointsPerUnit: 2500000
 --- !u!1 &749401856
 GameObject:
   m_ObjectHideFlags: 0
