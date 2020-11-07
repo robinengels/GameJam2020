@@ -174,3 +174,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7577355019156863853}
   speed: 5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256

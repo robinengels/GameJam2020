@@ -29,7 +29,8 @@ namespace IPL
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (playerLayer == (1 << other.gameObject.layer | playerLayer)) return;
+            if (!_isMoving) return;
+            if (playerLayer != (1 << other.gameObject.layer | playerLayer)) return;
             _isMoving = false;
             StartCoroutine(PlayAttackAnimation());
             StartCoroutine(GameOver());
