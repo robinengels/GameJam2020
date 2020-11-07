@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf85fef290a4aedb9370b4c8ffbeab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orthographicSizeMultiplier: 10
+  orthographicSizeMultiplier: 20
 --- !u!1 &3208052363017603514
 GameObject:
   m_ObjectHideFlags: 0
