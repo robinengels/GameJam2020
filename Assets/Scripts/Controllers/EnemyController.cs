@@ -44,7 +44,12 @@ public class EnemyController : MonoBehaviour
         if (playerLayer != (1 << other.gameObject.layer | playerLayer)) return;
         _isMoving = false;
         StartCoroutine(PlayAttackAnimation());
-        StartCoroutine(GameOver());
+        if (other.TryGetComponent(out PlayerController player))
+        {
+            if (player.IsDead) return;
+            player.Die();
+            StartCoroutine(GameOver());
+        }
     }
 
     private void OnEnable()

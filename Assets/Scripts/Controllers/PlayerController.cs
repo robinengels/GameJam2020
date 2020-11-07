@@ -25,8 +25,11 @@ public class PlayerController : MonoBehaviour
     public Action<List<(string,int)>> onBonusUpdate;
     private bool canFire;
     private bool IsGrounded;
-
+    private Animator _animator;
     
+    // DEATH
+    private bool _isDead;
+    public bool IsDead => _isDead;
     
     //BLOCK 
 
@@ -64,6 +67,11 @@ public class PlayerController : MonoBehaviour
     private int speedBonusTimer;
     private float bonusSpeed;
     [SerializeField] private LayerMask obstacleLayer;
+    
+    private static readonly int _Jump = Animator.StringToHash("Jump");
+    private static readonly int _Slide = Animator.StringToHash("Slide");
+    private static readonly int _PistolTime = Animator.StringToHash("PistolTime");
+    private static readonly int _HasBeenHit = Animator.StringToHash("HasBeenHit");
 
     private void Awake()
     {
@@ -73,7 +81,9 @@ public class PlayerController : MonoBehaviour
         bonusSpeed = 0.7f;
         StartCoroutine(PistolMode());
         StartCoroutine(IncreaseSpeed());
-        Collider = gameObject.GetComponent<BoxCollider2D>();
+        Collider = GetComponent<BoxCollider2D>();
+        _animator = GetComponent<Animator>();
+        _isDead = false;
     }
     
     private void FixedUpdate()
@@ -85,18 +95,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (_isDead) return;
         
         var velocity = Time.deltaTime * speed * Vector3.right;
         transform.position += velocity;
-
-       
+            
         if (Input.GetButtonDown("Jump"))
         {
             if (IsGrounded && !Blocked)
             {
 
                 rb.AddForce(Vector3.up * jumpForce);
-                gameObject.GetComponent<Animator>().SetTrigger("Jump");
+                _animator.SetTrigger(_Jump);
             }
         }
 
@@ -110,7 +120,7 @@ public class PlayerController : MonoBehaviour
                 Collider.enabled = false;
                 SlideCollider.enabled = true;
 
-                gameObject.GetComponent<Animator>().SetTrigger("Slide");
+                _animator.SetTrigger(_Slide);
                 StartCoroutine(ResetCollider());
 
             }
@@ -149,8 +159,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(SecondBeforePistolMode);
         canFire = true;
-        gameObject.GetComponent<Animator>().SetTrigger("PistolTime");
-
+        _animator.SetTrigger(_PistolTime);
     }
 
     private void OnDrawGizmos()
@@ -159,6 +168,12 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(GroundCheck.position, 0.05f);
     }
 
+    public void Die()
+    {
+        _isDead = true;
+        _animator.SetTrigger(_HasBeenHit);
+    }
+    
     public void randBonus()
     {
         int bonus = Random.Range(1, 4);
