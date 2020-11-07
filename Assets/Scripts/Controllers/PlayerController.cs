@@ -1,31 +1,39 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using Pooling;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Physics")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float jumpForce;
-   
+    
+    [Header("Collisions")]
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask collisionLayer;
-
+    [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private BoxCollider2D SlideCollider;
+    
+    [Header("Shooting")]
     [SerializeField] private GameObject projectilePrefabe;
     [SerializeField] private Transform LaunchOffset;
-
-    [SerializeField] private float acceleration;
-    
+    [SerializeField] private float fireRate;
     [SerializeField] private float SecondBeforePistolMode;
 
+    [Header("Speed")]
+    [SerializeField] private float acceleration;
     public float speed;
+    
     public Action<List<(string,int)>> onBonusUpdate;
-    private bool canFire;
     private bool IsGrounded;
     private Animator _animator;
+    
+    // FIRE
+    private bool _isPistolMode;
+    private bool _canFire;
     
     // DEATH
     private bool _isDead;
@@ -43,7 +51,6 @@ public class PlayerController : MonoBehaviour
 
 
     //SLIDE
-    [SerializeField] private BoxCollider2D SlideCollider;
     private BoxCollider2D Collider;
     private bool IsSlidding;
 
@@ -66,7 +73,6 @@ public class PlayerController : MonoBehaviour
     private bool speedBonusActivated;
     private int speedBonusTimer;
     private float bonusSpeed;
-    [SerializeField] private LayerMask obstacleLayer;
     
     private static readonly int _Jump = Animator.StringToHash("Jump");
     private static readonly int _Slide = Animator.StringToHash("Slide");
@@ -83,7 +89,6 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(IncreaseSpeed());
         Collider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
-        _isDead = false;
     }
     
     private void FixedUpdate()
@@ -126,8 +131,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (canFire && Input.GetButtonDown("Fire1"))
+        if (_isPistolMode && _canFire && Input.GetButtonDown("Fire1"))
         {
+            StartCoroutine(HandleFireRate());
             if (projectilePrefabe.TryAcquire(out var projectile))
             {
                 var projectileTransform = projectile.transform;
@@ -135,6 +141,13 @@ public class PlayerController : MonoBehaviour
                 projectileTransform.rotation = LaunchOffset.rotation;
             }
         }
+    }
+
+    private IEnumerator HandleFireRate()
+    {
+        _canFire = false;
+        yield return new WaitForSeconds(fireRate);
+        _canFire = true;
     }
 
     private IEnumerator IncreaseSpeed()
@@ -158,7 +171,8 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PistolMode()
     {
         yield return new WaitForSeconds(SecondBeforePistolMode);
-        canFire = true;
+        _isPistolMode = true;
+        _canFire = true;
         _animator.SetTrigger(_PistolTime);
     }
 
