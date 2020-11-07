@@ -3,27 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Pooling;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float jumpForce;
-    public float speed;
+   
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask collisionLayer;
 
-    [SerializeField] private ProjectileController projectilePrefabe;
+    [SerializeField] private GameObject projectilePrefabe;
     [SerializeField] private Transform LaunchOffset;
 
     [SerializeField] private float acceleration;
     
     [SerializeField] private float SecondBeforePistolMode;
-    
+
+    public float speed;
     public Action<List<(string,int)>> onBonusUpdate;
-    private Vector3 velocity = Vector3.zero;
     private bool canFire;
     private bool IsGrounded;
+
     
     
     //BLOCK 
@@ -36,8 +38,15 @@ public class PlayerController : MonoBehaviour
         set => blocked = value;
     }
 
+
+    //SLIDE
+    [SerializeField] private BoxCollider2D SlideCollider;
+    private BoxCollider2D Collider;
+    private bool IsSlidding;
+
+
     //BONUS JUMP
-    
+
     private float originalJumpForce;
     private bool jumpBonusActivated = false;
     private int jumpBonusTimer;
@@ -64,6 +73,7 @@ public class PlayerController : MonoBehaviour
         bonusSpeed = 0.7f;
         StartCoroutine(PistolMode());
         StartCoroutine(IncreaseSpeed());
+        Collider = gameObject.GetComponent<BoxCollider2D>();
     }
     
     private void FixedUpdate()
@@ -79,11 +89,7 @@ public class PlayerController : MonoBehaviour
         var velocity = Time.deltaTime * speed * Vector3.right;
         transform.position += velocity;
 
-        //rb.AddForce(Vector3.right * Time.deltaTime * 0.01f);
-
-        //rb.velocity = Vector3.SmoothDamp(rb.velocity, Vector3.right, ref velocity, .05f);
-
-        //rb.AddForce(Vector3.right * speed);
+       
         if (Input.GetButtonDown("Jump"))
         {
             if (IsGrounded && !Blocked)
@@ -94,10 +100,30 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (!IsSlidding && IsGrounded)
+            {
+                IsSlidding = true;
+
+                Collider.enabled = false;
+                SlideCollider.enabled = true;
+
+                gameObject.GetComponent<Animator>().SetTrigger("Slide");
+                StartCoroutine(ResetCollider());
+
+            }
+        }
+
         if (canFire && Input.GetButtonDown("Fire1"))
         {
-            Instantiate(projectilePrefabe, LaunchOffset.position, LaunchOffset.rotation);
+            if (projectilePrefabe.TryAcquire(out var projectile))
+            {
+                var projectileTransform = projectile.transform;
+                projectileTransform.position = LaunchOffset.position;
+                projectileTransform.rotation = LaunchOffset.rotation;
+            }
         }
     }
 
@@ -108,6 +134,15 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             speed += acceleration;
         }
+    }
+
+    private IEnumerator ResetCollider()
+    {
+        yield return new WaitForSeconds(0.4f);
+        Collider.enabled = true;
+        SlideCollider.enabled = false;
+        IsSlidding = false;
+
     }
 
     private IEnumerator PistolMode()

@@ -15,6 +15,7 @@
             <e p="PlayerController.cs" t="Include" />
             <e p="ProjectileController.cs" t="Include" />
           </e>
+          <e p="EnemySpawner.cs" t="Include" />
           <e p="GameManager" t="Include">
             <e p="GameManager.cs" t="Include" />
             <e p="SingletonMb.cs" t="Include" />
@@ -23,12 +24,19 @@
             <e p="GameOverMenuButtonsInitializer.cs" t="Include" />
           </e>
           <e p="LevelGenerator.cs" t="Include" />
+          <e p="Pooling" t="Include">
+            <e p="GameObjectExtension.cs" t="Include" />
+            <e p="ObjectPool.cs" t="Include" />
+            <e p="Pooled.cs" t="Include" />
+            <e p="ReleaseOnOutOfFrame.cs" t="Include" />
+          </e>
           <e p="Score" t="Include">
             <e p="PointsPerUnitGiver.cs" t="Include" />
             <e p="ScoreManager.cs" t="Include" />
             <e p="ScoreText.cs" t="Include" />
           </e>
         </e>
+        <e p="SpeedSlower.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Examples &amp; Extras" t="Include">
             <e p="Fonts" t="Include">

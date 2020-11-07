@@ -93,7 +93,8 @@ GameObject:
   - component: {fileID: 7577355019156863855}
   - component: {fileID: 7577355019156863853}
   - component: {fileID: 7577355019156863854}
-  m_Layer: 0
+  - component: {fileID: 195265396935842113}
+  m_Layer: 20
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,12 +110,12 @@ Transform:
   m_GameObject: {fileID: 7577355019156863841}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 7577355018051909953}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!61 &7577355019156863855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -177,3 +178,16 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &195265396935842113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577355019156863841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf85fef290a4aedb9370b4c8ffbeab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orthographicSizeMultiplicator: 3
