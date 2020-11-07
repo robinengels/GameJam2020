@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         _currentScore = 0;
-        _hiScore = PlayerPrefs.GetInt(HI_SCORE);
+        _hiScore = PlayerPrefs.GetInt(HI_SCORE,0);
     }
 
     private void OnDisable()

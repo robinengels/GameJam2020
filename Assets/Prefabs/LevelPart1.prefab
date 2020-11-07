@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ec98d80923a644a850e12425419443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropRating: 15
+  dropRating: 10
   Bonus: {fileID: 4573282349870942800, guid: f333489aa63e5d141915cfe4fd3afe0e, type: 3}
   LevelPart: {fileID: 8728094785422811207}
 --- !u!1 &7425388119493712122

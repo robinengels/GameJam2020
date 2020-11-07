@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prepended: 'Your high score is '
   useForHiScore: 1
-  _tmpText: {fileID: 0}
+  _tmpText: {fileID: 39167418}
 --- !u!1 &136963135
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prepended: 
   useForHiScore: 0
-  _tmpText: {fileID: 0}
+  _tmpText: {fileID: 291441830}
 --- !u!114 &291441830
 MonoBehaviour:
   m_ObjectHideFlags: 0
