@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Pooling;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private TMP_Text bonusText;
 
-    [SerializeField] private ProjectileController projectilePrefabe;
+    [SerializeField] private GameObject projectilePrefabe;
     [SerializeField] private Transform LaunchOffset;
 
     [SerializeField] private float SecondBeforePistolMode;
@@ -75,7 +76,12 @@ public class PlayerController : MonoBehaviour
         
         if (canFire && Input.GetButtonDown("Fire1"))
         {
-            Instantiate(projectilePrefabe, LaunchOffset.position, LaunchOffset.rotation);
+            if (projectilePrefabe.TryAcquire(out var projectile))
+            {
+                var projectileTransform = projectile.transform;
+                projectileTransform.position = LaunchOffset.position;
+                projectileTransform.rotation = LaunchOffset.rotation;
+            }
         }
     }
 

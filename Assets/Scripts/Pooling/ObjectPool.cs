@@ -8,10 +8,9 @@ namespace Pooling
     public class ObjectPool : MonoBehaviour
     {
         [SerializeField] private GameObject pooledObject;
-        [SerializeField] private int maxActiveInstances = 2;
         
-        private Queue<GameObject> _pool = new Queue<GameObject>(5);
-        private static Dictionary<GameObject, ObjectPool> _pools = new Dictionary<GameObject, ObjectPool>(5);
+        private Queue<GameObject> _pool = new Queue<GameObject>(50);
+        private static Dictionary<GameObject, ObjectPool> _pools = new Dictionary<GameObject, ObjectPool>(10);
         private Transform _transform;
 
         public static ObjectPool GetPool(GameObject pooledObject)

@@ -52,8 +52,8 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger(_Shot);
         _collider.enabled = false;
         _isMoving = false;
-        // No need to destroy, PoolableEnemy takes care of it
-        // The enemy on the left doesn't have a PoolableEnemy script but it can't be shot
+        // No need to destroy, ReleaseOnOutOfFrame takes care of it
+        // The enemy on the left doesn't have a ReleaseOnOutOfFrame script but it can't be shot
     }
 
     private IEnumerator GameOver()

@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using Pooling;
 
 public class ProjectileController : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class ProjectileController : MonoBehaviour
         {
             enemy.Die();
         }
-        Destroy(gameObject);
+        gameObject.TryRelease();
     }
 
     // private IEnumerator DestroyAuto()
