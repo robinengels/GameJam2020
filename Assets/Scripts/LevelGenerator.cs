@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
+using Pooling;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -41,7 +38,13 @@ public class LevelGenerator : MonoBehaviour
 
     private Transform SpawnLevelPart(Transform levelPart, Vector3 position)
     {
-        Transform levelPartTransform = Instantiate(levelPart, position, Quaternion.identity);
-        return levelPartTransform;
+        // Transform levelPartTransform = Instantiate(levelPart, position, Quaternion.identity);
+        if (levelPart.gameObject.TryAcquire(out var part))
+        {
+            var partTransform = part.transform;
+            partTransform.position = position;
+            return partTransform;
+        }
+        return null;
     }
 }
