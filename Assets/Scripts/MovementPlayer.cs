@@ -12,17 +12,31 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask collisionLayer;
-
+    
     [SerializeField] private TMP_Text bonusText;
 
-
+    public Action<List<(string,int)>> onBonusUpdate;
     private Vector3 velocity = Vector3.zero;
     private bool IsGrounded;
+    
+    //BONUS JUMP
+    
     private float originalJumpForce;
+    private bool jumpBonusActivated = false;
+    private int jumpBonusTimer;
+    
+    //BONUS GIANT
+
+    private Vector3 originalScale;
+    private Vector3 bonusScale;
+    private bool giantBonusActivated;
+    private int giantBonusTimer;
 
     private void Awake()
     {
         originalJumpForce = jumpForce;
+        originalScale = gameObject.transform.localScale;
+        bonusScale = originalScale * 2;
     }
 
     private void FixedUpdate()
@@ -73,21 +87,72 @@ public class MovementPlayer : MonoBehaviour
         switch (bonus)
         {
             case 1:
+                Debug.Log("Bonus JUMP");
                 jumpForce = 180;
-                StartCoroutine(bonusJumpCoolDown());
+                if (jumpBonusActivated)
+                {
+                    jumpBonusTimer = 10;
+                    break;
+                }
+                jumpBonusActivated = true;
+                jumpBonusTimer = 10;
+                StartCoroutine(UpdateJumpBonus());
+                updateBonusUI();
                 break;
             
             case 2:
-                Debug.Log("Bonus 2");
+                gameObject.transform.localScale = bonusScale;
+                Physics2D.IgnoreLayerCollision(15,8,true);
+                if (giantBonusActivated)
+                {
+                    giantBonusTimer = 10;
+                    break;
+                }
+                giantBonusActivated = true;
+                giantBonusTimer = 10;
+                StartCoroutine(UpdateGiantBonus());
+                updateBonusUI();
                 break;
                     
         }
     }
 
-    private IEnumerator bonusJumpCoolDown()
+    private IEnumerator UpdateJumpBonus()
     {
-        onBonusChange("SUPER JUMP");
-        yield return new WaitForSeconds(10f);
+        while(jumpBonusTimer > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            jumpBonusTimer -= 1;
+            updateBonusUI();
+        }
+
         jumpForce = originalJumpForce;
+        jumpBonusActivated = false;
+        updateBonusUI();
+    }
+    
+    private IEnumerator UpdateGiantBonus()
+    {
+        while(giantBonusTimer > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            giantBonusTimer -= 1;
+            updateBonusUI();
+        }
+
+        gameObject.transform.localScale = originalScale;
+        Physics2D.IgnoreLayerCollision(15,8,false);
+        giantBonusActivated = false;
+        updateBonusUI();
+    }
+    
+   
+
+    private void updateBonusUI()
+    {
+        List<(string,int)> to_send = new List<(string, int)>();
+        if(jumpBonusActivated) to_send.Add(("SUPER JUMP",jumpBonusTimer));
+        if(giantBonusActivated) to_send.Add(("GIANT",giantBonusTimer));
+        onBonusUpdate(to_send);
     }
 }

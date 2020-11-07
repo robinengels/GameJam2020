@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7156697620419657999}
   - component: {fileID: 6996336252701190791}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: tiles_out_118
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3601893139158602894}
   - component: {fileID: 7870092395281949154}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: tiles_out_109
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3630039103508094283}
   - component: {fileID: 4417568878380518235}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: tiles_out_108
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6425266039086256838}
   - component: {fileID: 3643779711988223907}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: tiles_out_119
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3266678161911935160}
   - component: {fileID: 2732331257364756944}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: LevelPartCaisse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
