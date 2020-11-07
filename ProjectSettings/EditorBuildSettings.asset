@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Build/MainMenu.unity
     guid: f6f88504a60b3044ab8bf25799ddb620
+  - enabled: 1
+    path: Assets/Scenes/Scene Robin 2.unity
+    guid: 72c8e21ff17d99945872fe92de2cfe2f
   m_configObjects: {}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Pooling;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -21,10 +22,14 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private float SecondBeforePistolMode;
 
+    [SerializeField] private AudioClip AudioJump;    
+    
     public float speed;
     public Action<List<(string,int)>> onBonusUpdate;
     private bool canFire;
     private bool IsGrounded;
+
+    private AudioSource _audioSource;
 
     
     
@@ -65,6 +70,12 @@ public class PlayerController : MonoBehaviour
     private float bonusSpeed;
     [SerializeField] private LayerMask obstacleLayer;
 
+    
+    //PLAYER UI
+    [SerializeField] private Image noJumpingIcon;
+
+    public Image NoJumpingIcon => noJumpingIcon;
+
     private void Awake()
     {
         originalJumpForce = jumpForce;
@@ -74,6 +85,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PistolMode());
         StartCoroutine(IncreaseSpeed());
         Collider = gameObject.GetComponent<BoxCollider2D>();
+        _audioSource = FindObjectOfType<AudioSource>();
     }
     
     private void FixedUpdate()
@@ -94,7 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded && !Blocked)
             {
-
+                _audioSource.PlayOneShot(AudioJump);
                 rb.AddForce(Vector3.up * jumpForce);
                 gameObject.GetComponent<Animator>().SetTrigger("Jump");
             }
@@ -107,8 +119,9 @@ public class PlayerController : MonoBehaviour
             {
                 IsSlidding = true;
 
-                Collider.enabled = false;
                 SlideCollider.enabled = true;
+                Collider.enabled = false;
+                
 
                 gameObject.GetComponent<Animator>().SetTrigger("Slide");
                 StartCoroutine(ResetCollider());

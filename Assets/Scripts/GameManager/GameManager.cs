@@ -18,7 +18,12 @@ public class GameManager : SingletonMb<GameManager>
 
     public void NewGame()
     {
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene("Scene Robin 2");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     public void PlayAgain()
