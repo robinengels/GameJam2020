@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Pooling;
 
 public class bonusActivator : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class bonusActivator : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Trigger");
-        gameObject.SetActive(false);
+        gameObject.TryRelease();
         PlayerController player = FindObjectOfType<PlayerController>();
         player.randBonus();
     }

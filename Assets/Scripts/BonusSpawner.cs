@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
+using Pooling;
 
 public class BonusSpawner : MonoBehaviour
 {
@@ -27,7 +23,11 @@ public class BonusSpawner : MonoBehaviour
     private void spawnRandomBonus()
     {
         Vector3 pos_to_spawn = LevelPart.Find("BonusSpawn").position;
-        spawned = Instantiate(Bonus, pos_to_spawn, Quaternion.identity);
+        if (Bonus.gameObject.TryAcquire(out var bonus))
+        {
+            var bonusTransform = bonus.transform;
+            bonusTransform.position = pos_to_spawn;
+        }
     }
 
 }
