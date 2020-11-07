@@ -1,16 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
     
-    [SerializeField]
-    private float speed =0.7f;
-  
+    [SerializeField] private float speed = 0.7f;
+    [SerializeField] private LayerMask enemyLayer;
+    
     private void Update()
     {
-        StartCoroutine(DestroyAuto());
+        // StartCoroutine(DestroyAuto());
         var velocity = Time.deltaTime * speed * Vector3.right;
         transform.position += velocity;
 
@@ -18,15 +17,19 @@ public class ProjectileController : MonoBehaviour
       
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
+        if (enemyLayer != (1 << other.gameObject.layer | enemyLayer)) return;
+        if (other.TryGetComponent(out EnemyController enemy))
+        {
+            enemy.Die();
+        }
         Destroy(gameObject);
     }
 
-    private IEnumerator DestroyAuto()
-    {
-        yield return new WaitForSeconds(10f);
-        Destroy(gameObject);
-    }
+    // private IEnumerator DestroyAuto()
+    // {
+    //     yield return new WaitForSeconds(10f);
+    //     Destroy(gameObject);
+    // }
 }

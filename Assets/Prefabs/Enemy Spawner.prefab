@@ -46,6 +46,6 @@ MonoBehaviour:
   ySpawnPos: 0.162
   enemyPrefab: {fileID: 1987000031804475281, guid: 98de6b1cd0e97e041aab409fbac5e2dc,
     type: 3}
-  minScore: 50
+  minScore: 20
   minSpawnTimeInterval: 2
   maxSpawnTimeInterval: 5

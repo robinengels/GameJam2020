@@ -19,6 +19,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7577355018051909952, guid: c9499f3798c0be149b6dfb03e8e66c78,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7577355018051909953, guid: c9499f3798c0be149b6dfb03e8e66c78,
         type: 3}
       propertyPath: m_LocalRotation.x

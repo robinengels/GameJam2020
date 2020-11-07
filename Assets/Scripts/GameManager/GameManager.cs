@@ -1,5 +1,4 @@
-﻿using IPL;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMb<GameManager>
