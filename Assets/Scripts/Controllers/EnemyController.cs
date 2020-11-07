@@ -7,7 +7,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask playerLayer;
-
+    [SerializeField] private float acceleration;
+    
     private bool _isMoving;
     private Transform _transform;
     private BoxCollider2D _collider;
@@ -17,7 +18,18 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         _transform = transform;
+        _isMoving = true;
+        StartCoroutine(IncreaseSpeed());
         _collider = GetComponent<BoxCollider2D>();
+    }
+    
+    private IEnumerator IncreaseSpeed()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            speed += acceleration;
+        }
     }
 
     private void Update()

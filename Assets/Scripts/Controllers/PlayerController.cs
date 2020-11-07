@@ -13,11 +13,12 @@ public class PlayerController : MonoBehaviour
    
     [SerializeField] private Transform GroundCheck;
     [SerializeField] private LayerMask collisionLayer;
-    [SerializeField] private TMP_Text bonusText;
 
     [SerializeField] private GameObject projectilePrefabe;
     [SerializeField] private Transform LaunchOffset;
 
+    [SerializeField] private float acceleration;
+    
     [SerializeField] private float SecondBeforePistolMode;
 
     public float speed;
@@ -25,10 +26,24 @@ public class PlayerController : MonoBehaviour
     private bool canFire;
     private bool IsGrounded;
 
+    
+    
+    //BLOCK 
+
+    private bool blocked = false;
+
+    public bool Blocked
+    {
+        get => blocked;
+        set => blocked = value;
+    }
+
+
     //SLIDE
     [SerializeField] private BoxCollider2D SlideCollider;
     private BoxCollider2D Collider;
     private bool IsSlidding;
+
 
     //BONUS JUMP
 
@@ -42,32 +57,42 @@ public class PlayerController : MonoBehaviour
     private Vector3 bonusScale;
     private bool giantBonusActivated;
     private int giantBonusTimer;
+    
+    //BONUS SPEED
+    private float originalSpeed;
+    private bool speedBonusActivated;
+    private int speedBonusTimer;
+    private float bonusSpeed;
+    [SerializeField] private LayerMask obstacleLayer;
 
     private void Awake()
     {
         originalJumpForce = jumpForce;
         originalScale = gameObject.transform.localScale;
         bonusScale = originalScale * 2;
+        bonusSpeed = 0.7f;
         StartCoroutine(PistolMode());
+        StartCoroutine(IncreaseSpeed());
         Collider = gameObject.GetComponent<BoxCollider2D>();
     }
     
     private void FixedUpdate()
     {
-        IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.05f, collisionLayer);
-
+        var position = GroundCheck.position;
+        IsGrounded = Physics2D.OverlapCircle(position, 0.05f, collisionLayer)
+                     || Physics2D.OverlapCircle(position, 0.05f, obstacleLayer);
     }
 
     void Update()
     {
-        StartCoroutine(IncreaseSpeed());
+        
         var velocity = Time.deltaTime * speed * Vector3.right;
         transform.position += velocity;
 
        
         if (Input.GetButtonDown("Jump"))
         {
-            if (IsGrounded)
+            if (IsGrounded && !Blocked)
             {
 
                 rb.AddForce(Vector3.up * jumpForce);
@@ -104,9 +129,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator IncreaseSpeed()
     {
-        yield return new WaitForSeconds(1f);
-        speed += (float)0.00001;
-
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            speed += acceleration;
+        }
     }
 
     private IEnumerator ResetCollider()
@@ -134,11 +161,13 @@ public class PlayerController : MonoBehaviour
 
     public void randBonus()
     {
-        int bonus = Random.Range(1, 3);
+        int bonus = Random.Range(1, 4);
         switch (bonus)
         {
             case 1:
                 Debug.Log("Bonus JUMP");
+                speedBonusTimer = 0;
+                giantBonusTimer = 0;
                 jumpForce = 180;
                 if (jumpBonusActivated)
                 {
@@ -152,6 +181,8 @@ public class PlayerController : MonoBehaviour
                 break;
             
             case 2:
+                speedBonusTimer = 0;
+                jumpBonusTimer = 0;
                 gameObject.transform.localScale = bonusScale;
                 Physics2D.IgnoreLayerCollision(15,8,true);
                 if (giantBonusActivated)
@@ -164,8 +195,41 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(UpdateGiantBonus());
                 updateBonusUI();
                 break;
-                    
+            
+            case 3:
+                jumpBonusTimer = 0;
+                giantBonusTimer = 0;
+                originalSpeed = speed;
+                if (speedBonusActivated)
+                {
+                    speedBonusTimer = 10;
+                    break;
+                }
+                else
+                {
+                    speed += 0.1f; 
+                }
+
+                speedBonusActivated = true;
+                speedBonusTimer = 10;
+                StartCoroutine(UpdateSpeedBonus());
+                updateBonusUI();
+                break;
         }
+    }
+
+    private IEnumerator UpdateSpeedBonus()
+    {
+        while (speedBonusTimer > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            speedBonusTimer -= 1;
+            updateBonusUI();
+        }
+
+        speed = originalSpeed;
+        speedBonusActivated = false;
+        updateBonusUI();
     }
 
     private IEnumerator UpdateJumpBonus()
@@ -204,6 +268,7 @@ public class PlayerController : MonoBehaviour
         List<(string,int)> to_send = new List<(string, int)>();
         if(jumpBonusActivated) to_send.Add(("SUPER JUMP",jumpBonusTimer));
         if(giantBonusActivated) to_send.Add(("GIANT",giantBonusTimer));
+        if(speedBonusActivated) to_send.Add(("SPEED",speedBonusTimer));
         onBonusUpdate(to_send);
     }
 }

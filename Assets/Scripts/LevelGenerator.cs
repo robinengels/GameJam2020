@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Pooling;
+using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -10,8 +13,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<Transform> levelPartList;
     [SerializeField] private Transform player;
     private Vector3  _lastEndPosition;
-
-
+    
     private void Awake()
     {
         _lastEndPosition = levelPartStart.Find("EndPoint").position;
