@@ -1178,6 +1178,7 @@ MonoBehaviour:
   - {fileID: 5181429171779100428, guid: 5f04bc8dd91693842a274027a75f9a83, type: 3}
   - {fileID: 1934529648208103920, guid: ad1de2a29b0adf54fab360176b82c66f, type: 3}
   - {fileID: 6549222469951043536, guid: 95f855e0d4c984f1893d9706e0506821, type: 3}
+  - {fileID: 49493782167657794, guid: 7c6b96eab95aa0741a0fc9654aa7ec1e, type: 3}
   player: {fileID: 1433198506}
 --- !u!4 &1213314257
 Transform:
