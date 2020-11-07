@@ -624,6 +624,10 @@ MonoBehaviour:
   - {fileID: 7042615055288815039, guid: 1f1beacaf87f7804eb03604479d4e6f1, type: 3}
   - {fileID: 2322227584871107226, guid: e7b9468a238f2d041a7103226542eb5c, type: 3}
   - {fileID: 6891370335161709969, guid: 9d1785299ed246a4c992fbf8778a93fc, type: 3}
+  - {fileID: 6549222469951043536, guid: 95f855e0d4c984f1893d9706e0506821, type: 3}
+  - {fileID: 1811120252872105719, guid: 8c44d8f60ceeecb4e9e42f5e7c1fa1e8, type: 3}
+  - {fileID: 5181429171779100428, guid: 5f04bc8dd91693842a274027a75f9a83, type: 3}
+  - {fileID: 1934529648208103920, guid: ad1de2a29b0adf54fab360176b82c66f, type: 3}
   player: {fileID: 620738585}
 --- !u!4 &595538536
 Transform:
@@ -797,13 +801,16 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 1
-  bonusText: {fileID: 0}
   projectilePrefabe: {fileID: 1040824723997147898, guid: 2d275bcb1e44d4adbafbb9b420f88ef0,
     type: 3}
   LaunchOffset: {fileID: 142692868}
+  acceleration: 0
   SecondBeforePistolMode: 0
   speed: 0.5
   SlideCollider: {fileID: 0}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &620738585
 Transform:
   m_ObjectHideFlags: 0
