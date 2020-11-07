@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -26,6 +27,14 @@ public class ScoreText : MonoBehaviour
             UpdateText(GameManager.Instance.ScoreManager.Score);
             GameManager.Instance.ScoreManager.OnScoreChange += UpdateText;
         }
+    }
+
+    private void OnDestroy()
+    {
+        if(useForHiScore)
+            GameManager.Instance.ScoreManager.OnHiScoreChange -= UpdateText;
+        else
+            GameManager.Instance.ScoreManager.OnScoreChange -= UpdateText;
     }
 
     private void UpdateText(int value)

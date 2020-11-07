@@ -38,11 +38,11 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseScore(float value)
     {
         _currentScore += value;
-        OnScoreChange(Score);
+        OnScoreChange?.Invoke(Score);
         if (_currentScore > _hiScore)
         {
             _hiScore = Score;
-            OnHiScoreChange(_hiScore);
+            OnHiScoreChange?.Invoke(_hiScore);
         }
     }
 }
