@@ -9,7 +9,8 @@ namespace IPL
         [SerializeField] private Animator animator;
         [SerializeField] private float speed;
         [SerializeField] private LayerMask playerLayer;
-
+        [SerializeField] private float acceleration;
+        
         private bool _isMoving;
         private Transform _transform;
         private static readonly int _Attack = Animator.StringToHash("Attack");
@@ -18,8 +19,18 @@ namespace IPL
         {
             _transform = transform;
             _isMoving = true;
+            StartCoroutine(IncreaseSpeed());
         }
 
+        private IEnumerator IncreaseSpeed()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(1f);
+                speed += acceleration;
+            }
+        }
+        
         private void Update()
         {
             if (!_isMoving) return;

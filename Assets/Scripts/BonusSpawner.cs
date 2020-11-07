@@ -23,7 +23,7 @@ public class BonusSpawner : MonoBehaviour
             spawnRandomBonus();
         }
     }
-
+    
     private void spawnRandomBonus()
     {
         Vector3 pos_to_spawn = LevelPart.Find("BonusSpawn").position;

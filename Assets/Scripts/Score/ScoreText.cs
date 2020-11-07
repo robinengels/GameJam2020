@@ -7,11 +7,11 @@ public class ScoreText : MonoBehaviour
     [SerializeField] private string prepended;
     [SerializeField] private bool useForHiScore;
     
-    private TMP_Text _tmpText;
+    [SerializeField] private TMP_Text _tmpText;
     
     private void Awake()
     {
-        _tmpText = GetComponent<TMP_Text>();
+       // _tmpText = GetComponent<TMP_Text>();
     }
 
     private void OnEnable()

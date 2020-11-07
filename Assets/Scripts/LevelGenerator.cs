@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -13,6 +14,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<Transform> levelPartList;
     [SerializeField] private Transform player;
     private Vector3  _lastEndPosition;
+    
+    private List<Transform> trackedLevelPart = new List<Transform>();
 
 
     private void Awake()
@@ -33,6 +36,18 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        foreach (var lvlPart in trackedLevelPart.ToList())
+        {
+            if (Vector3.Distance(lvlPart.position, _lastEndPosition) > 15)
+            {
+                lvlPart.gameObject.SetActive(false);
+                trackedLevelPart.Remove(lvlPart);
+            }
+        }
+    }
+
     private void SpawnLevelPart()
     {
         Transform chosenLevelPart = levelPartList[Random.Range(0, levelPartList.Count)];
@@ -42,6 +57,7 @@ public class LevelGenerator : MonoBehaviour
     private Transform SpawnLevelPart(Transform levelPart, Vector3 position)
     {
         Transform levelPartTransform = Instantiate(levelPart, position, Quaternion.identity);
+        trackedLevelPart.Add(levelPartTransform);
         return levelPartTransform;
     }
 }
