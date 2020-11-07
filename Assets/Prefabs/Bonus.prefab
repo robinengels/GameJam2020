@@ -55,7 +55,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &6250402630523818639
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
