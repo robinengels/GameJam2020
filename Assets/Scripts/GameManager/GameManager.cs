@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pooling;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMb<GameManager>
@@ -18,6 +19,7 @@ public class GameManager : SingletonMb<GameManager>
 
     public void NewGame()
     {
+        ObjectPool.ResetPools();
         SceneManager.LoadScene("Scene Robin 2");
     }
 

@@ -24,6 +24,11 @@ namespace Pooling
             return pool;
         }
 
+        public static void ResetPools()
+        {
+            _pools = new Dictionary<GameObject, ObjectPool>(10);
+        }
+
         private void Awake()
         {
             _transform = transform;
