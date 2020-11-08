@@ -12,6 +12,6 @@ public class MenuButtonInitialiser : MonoBehaviour
     private void Awake()
     {
         play.onClick.AddListener(GameManager.Instance.NewGame);
-        quitToMenu.onClick.AddListener(GameManager.Instance.MainMenu);
+        quitToMenu.onClick.AddListener(GameManager.Instance.ExitGame);
     }
 }
