@@ -10,7 +10,7 @@ public class GameOverMenuButtonsInitializer : MonoBehaviour
 
     private void Awake()
     {
-        playAgain.onClick.AddListener(GameManager.Instance.PlayAgain);
+        playAgain.onClick.AddListener(GameManager.Instance.NewGame);
         quitToMenu.onClick.AddListener(GameManager.Instance.MainMenu);
     }
 }

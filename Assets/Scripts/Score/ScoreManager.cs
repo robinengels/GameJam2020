@@ -14,14 +14,14 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        _currentScore = 0;
+        ResetScore();
         _hiScore = PlayerPrefs.GetInt(HI_SCORE,0);
     }
 
     private void OnDisable()
     {
         Save();
-        _currentScore = 0;
+        ResetScore();
     }
 
     private void Save()
@@ -32,7 +32,6 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         _currentScore = 0f;
-        OnScoreChange(Score);
     }
     
     public void IncreaseScore(float value)

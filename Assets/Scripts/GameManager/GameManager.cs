@@ -19,6 +19,7 @@ public class GameManager : SingletonMb<GameManager>
 
     public void NewGame()
     {
+        scoreManager.ResetScore();
         ObjectPool.ResetPools();
         SceneManager.LoadScene("Scene Robin 2");
     }
@@ -26,12 +27,6 @@ public class GameManager : SingletonMb<GameManager>
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void PlayAgain()
-    {
-        scoreManager.ResetScore();
-        NewGame();
     }
 
     public void GameOver()

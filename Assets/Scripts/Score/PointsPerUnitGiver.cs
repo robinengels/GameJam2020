@@ -18,7 +18,8 @@ public class PointsPerUnitGiver : MonoBehaviour
         var currentPos = _transform.position;
         var metersRan = currentPos.x - _previousPos.x;
         var points = pointsPerUnit * metersRan;
-        GameManager.Instance.ScoreManager.IncreaseScore(points);
+        if(points > 0)
+            GameManager.Instance.ScoreManager.IncreaseScore(points);
         _previousPos = currentPos;
     }
 }
