@@ -904,7 +904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prepended: 'Current distance : '
   useForHiScore: 0
-  _tmpText: {fileID: 1834073527}
+  tmpText: {fileID: 1834073527}
 --- !u!4 &766651727
 Transform:
   m_ObjectHideFlags: 0

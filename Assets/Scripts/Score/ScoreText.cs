@@ -1,18 +1,11 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class ScoreText : MonoBehaviour
 {
     [SerializeField] private string prepended;
     [SerializeField] private bool useForHiScore;
-    [SerializeField] private TMP_Text _tmpText;
-
-    
-    private void Awake()
-    {
-    }
+    [SerializeField] private TMP_Text tmpText;
 
     private void OnEnable()
     {
@@ -41,6 +34,7 @@ public class ScoreText : MonoBehaviour
 
     private void UpdateText(int value)
     {
-        _tmpText.text = prepended + value;
+        if(tmpText)
+            tmpText.text = prepended + value;
     }
 }
