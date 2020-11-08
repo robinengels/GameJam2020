@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private float speed;
+    [SerializeField] protected float speed;
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private float acceleration;
+    [SerializeField] protected float acceleration;
     
     private bool _isMoving;
     private Transform _transform;
@@ -14,21 +14,15 @@ public class EnemyController : MonoBehaviour
     private static readonly int _Attack = Animator.StringToHash("Attack");
     private static readonly int _Shot = Animator.StringToHash("Shot");
 
+    protected abstract void OnAwake();
+    protected abstract void OnDestroyed();
+
     private void Awake()
     {
         _transform = transform;
         _isMoving = true;
-        StartCoroutine(IncreaseSpeed());
         _collider = GetComponent<BoxCollider2D>();
-    }
-    
-    private IEnumerator IncreaseSpeed()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            speed += acceleration;
-        }
+        OnAwake();
     }
 
     private void Update()
@@ -60,6 +54,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDestroy()
     {
+        OnDestroyed();
         StopAllCoroutines();
     }
 

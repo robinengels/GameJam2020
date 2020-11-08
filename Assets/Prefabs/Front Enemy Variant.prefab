@@ -13,6 +13,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orthographicSizeMultiplier: 10
+--- !u!114 &4006701069304945023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987000031804475281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840e41bb05d07b54f957fd6fe7896c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1987000031804475293}
+  speed: -0.1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  acceleration: 0.0052
 --- !u!1001 &8267221598830558448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +118,11 @@ PrefabInstance:
       propertyPath: speed
       value: -0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7577355019156863854, guid: c9499f3798c0be149b6dfb03e8e66c78,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7577355019156863855, guid: c9499f3798c0be149b6dfb03e8e66c78,
         type: 3}
       propertyPath: m_Offset.y
@@ -120,11 +143,18 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: -0.04
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7577355019156863854, guid: c9499f3798c0be149b6dfb03e8e66c78, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9499f3798c0be149b6dfb03e8e66c78, type: 3}
 --- !u!1 &1987000031804475281 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7577355019156863841, guid: c9499f3798c0be149b6dfb03e8e66c78,
+    type: 3}
+  m_PrefabInstance: {fileID: 8267221598830558448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1987000031804475293 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7577355019156863853, guid: c9499f3798c0be149b6dfb03e8e66c78,
     type: 3}
   m_PrefabInstance: {fileID: 8267221598830558448}
   m_PrefabAsset: {fileID: 0}
