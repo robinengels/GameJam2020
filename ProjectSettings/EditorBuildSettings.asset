@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Build/GameOver.unity
-    guid: 99bcc2c038af56b4fab5b2c4a179360d
+    path: Assets/Scenes/Build/MainMenu.unity
+    guid: f6f88504a60b3044ab8bf25799ddb620
   - enabled: 1
     path: Assets/Scenes/Build/Level.unity
     guid: b278106d3f842f841b1e7eaf804e009f
   - enabled: 1
-    path: Assets/Scenes/Build/MainMenu.unity
-    guid: f6f88504a60b3044ab8bf25799ddb620
+    path: Assets/Scenes/Build/GameOver.unity
+    guid: 99bcc2c038af56b4fab5b2c4a179360d
   - enabled: 1
     path: Assets/Scenes/Scene Robin 2.unity
     guid: 72c8e21ff17d99945872fe92de2cfe2f
