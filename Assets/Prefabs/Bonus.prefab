@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4573282349870942800}
   - component: {fileID: 5251928179244239264}
-  - component: {fileID: 6250402630523818639}
   - component: {fileID: 2064753387229590384}
   m_Layer: 14
   m_Name: Bonus
@@ -27,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722224352580751386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.253, y: -0.95063305, z: -1}
+  m_LocalPosition: {x: -1.253, y: -0.95063305, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 669388217384316057}
@@ -55,24 +54,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722224352580751386}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 29570034f5c0fa84e8b1b980bd6df469, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!82 &2064753387229590384
 AudioSource:
   m_ObjectHideFlags: 0
@@ -289,8 +270,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -276845107
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 8710723752907654049, guid: 0292fcbd1bc547a4fa13b39db00b6d9a,
     type: 3}
