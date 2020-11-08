@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Physics")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float jumpForce;
+    [SerializeField] private AudioClip AudioJump;
     
     [Header("Collisions")]
     [SerializeField] private Transform GroundCheck;
@@ -23,9 +24,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform LaunchOffset;
     [SerializeField] private float fireRate;
     [SerializeField] private float SecondBeforePistolMode;
-    
-    [SerializeField] private AudioClip AudioJump;    
-    
 
     [Header("Speed")]
     [SerializeField] private float acceleration;

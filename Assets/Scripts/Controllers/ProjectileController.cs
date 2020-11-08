@@ -5,15 +5,15 @@ public class ProjectileController : MonoBehaviour
 {
     
     [SerializeField] private float speed = 0.7f;
+    [SerializeField] private float additionalSpeed = 0.2f;
     [SerializeField] private LayerMask enemyLayer;
     
     private void Update()
     {
-        // StartCoroutine(DestroyAuto());
         var velocity = Time.deltaTime * speed * Vector3.right;
         transform.position += velocity;
 
-        speed = GameObject.Find("Player").GetComponent<PlayerController>().speed + 0.2f;
+        speed = GameObject.Find("Player").GetComponent<PlayerController>().speed + additionalSpeed;
       
     }
 
@@ -26,10 +26,4 @@ public class ProjectileController : MonoBehaviour
         }
         gameObject.TryRelease();
     }
-
-    // private IEnumerator DestroyAuto()
-    // {
-    //     yield return new WaitForSeconds(10f);
-    //     Destroy(gameObject);
-    // }
 }
