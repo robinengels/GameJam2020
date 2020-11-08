@@ -38,13 +38,14 @@ public class LevelGenerator : MonoBehaviour
 
     private Transform SpawnLevelPart(Transform levelPart, Vector3 position)
     {
-        // Transform levelPartTransform = Instantiate(levelPart, position, Quaternion.identity);
-        if (levelPart.gameObject.TryAcquire(out var part))
-        {
-            var partTransform = part.transform;
-            partTransform.position = position;
-            return partTransform;
-        }
-        return null;
+        Transform levelPartTransform = Instantiate(levelPart, position, Quaternion.identity);
+        return levelPartTransform;
+        // if (levelPart.gameObject.TryAcquire(out var part))
+        // {
+        //     var partTransform = part.transform;
+        //     partTransform.position = position;
+        //     return partTransform;
+        // }
+        // return null;
     }
 }

@@ -23,11 +23,12 @@ public class BonusSpawner : MonoBehaviour
     private void spawnRandomBonus()
     {
         Vector3 pos_to_spawn = LevelPart.Find("BonusSpawn").position;
-        if (Bonus.gameObject.TryAcquire(out var bonus))
-        {
-            var bonusTransform = bonus.transform;
-            bonusTransform.position = pos_to_spawn;
-        }
+        Instantiate(Bonus, pos_to_spawn, Quaternion.identity);
+        // if (Bonus.gameObject.TryAcquire(out var bonus))
+        // {
+        //     var bonusTransform = bonus.transform;
+        //     bonusTransform.position = pos_to_spawn;
+        // }
     }
 
 }
